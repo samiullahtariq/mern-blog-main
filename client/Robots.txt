@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /create-post
+Disallow: /update-post
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /dashboard
+Disallow: /about
+Disallow: /projects
+
+# Allow all other paths
+Allow: /
+

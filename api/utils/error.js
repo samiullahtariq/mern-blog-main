@@ -1,0 +1,1 @@
+export const errorHandler=(r,e)=>{const o=new Error;return o.statusCode=r,o.message=e,o};

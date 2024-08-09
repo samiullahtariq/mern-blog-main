@@ -1,0 +1,1 @@
+import jwt from"jsonwebtoken";import{errorHandler}from"./error.js";export const verifyToken=(r,e,o)=>{const n=r.cookies.access_token;if(!n)return o(errorHandler(401,"Unauthorized"));jwt.verify(n,process.env.JWT_SECRET,(e,n)=>{if(e)return o(errorHandler(401,"Unauthorized"));r.user=n,o()})};

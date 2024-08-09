@@ -1,0 +1,1 @@
+import{initializeApp}from"firebase/app";const firebaseConfig={apiKey:import.meta.env.VITE_FIREBASE_API_KEY,authDomain:"mern-blog-9d5f0.firebaseapp.com",projectId:"mern-blog-9d5f0",storageBucket:"mern-blog-9d5f0.appspot.com",messagingSenderId:"329979520919",appId:"1:329979520919:web:d990e6879fee707c6846d2"};export const app=initializeApp(firebaseConfig);

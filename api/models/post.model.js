@@ -1,0 +1,1 @@
+import mongoose from"mongoose";const postSchema=new mongoose.Schema({userId:{type:String,required:!0},content:{type:String,required:!0},title:{type:String,required:!0,unique:!0},image:{type:String},category:{type:String,default:"uncategorized"},slug:{type:String,required:!0,unique:!0}},{timestamps:!0}),Post=mongoose.model("Post",postSchema);export default Post;

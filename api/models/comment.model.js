@@ -1,0 +1,1 @@
+import mongoose from"mongoose";const commentSchema=new mongoose.Schema({content:{type:String,required:!0},postId:{type:String,required:!0},userId:{type:String,required:!0},likes:{type:Array,default:[]},numberOfLikes:{type:Number,default:0}},{timestamps:!0}),Comment=mongoose.model("Comment",commentSchema);export default Comment;
