@@ -1,13 +1,17 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function PostCard({ post }) {
   return (
-    <div className='group relative w-full border border-teal-500 hover:border-2 h-[400px] overflow-hidden rounded-lg sm:w-[430px] transition-all'>
+    <div className='group relative w-full border border-teal-500 hover:border-2 h-[360px] overflow-hidden rounded-lg sm:w-[340px] transition-all'>
       <Link to={`/post/${post.slug}`}>
-        <img
+        <LazyLoadImage
           src={post.image}
           alt='post cover'
-          className='h-[260px] w-full  object-cover group-hover:h-[200px] transition-all duration-300 z-20'
+          className='h-[260px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20'
+          effect='blur'
         />
       </Link>
       <div className='p-3 flex flex-col gap-2'>

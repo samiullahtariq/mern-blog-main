@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 import HelmetTitle from '../components/HelmetTitle';
 import LazyLoad from '../components/LazyLoad';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const limitToFourKeywords = (text) => {
   const words = text.split(' ');
@@ -103,10 +104,11 @@ export default function PostPage() {
               </Link>
             </div>
 
-            <img
+            <LazyLoadImage
               src={post && post.image}
               alt={post && post.title}
               className='mt-10 p-3 max-h-[600px] w-full object-cover title-image rounded-image'
+              effect='blur'
             />
             <div className='flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs'>
               <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
@@ -149,7 +151,7 @@ export default function PostPage() {
               <h1 className='text-xl mt-5'>Recent articles</h1>
               <div className='flex flex-wrap gap-5 mt-5 justify-center'>
                 {recentPosts &&
-                  recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
+                  recentPosts.slice(0 ,1).map((post) => <PostCard key={post._id} post={post} />)}
               </div>
             </div>
           </div>

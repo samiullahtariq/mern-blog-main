@@ -13,6 +13,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ReactQuill from "react-quill"
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 export default function UpdatePost() {
@@ -183,7 +184,8 @@ export default function UpdatePost() {
         </div>
         {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
         {formData.image && (
-          <img
+          <LazyLoadImage
+          effect='blur'
             src={formData.image}
             alt='upload'
             className='w-full h-72 object-cover'

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { FaThumbsUp } from 'react-icons/fa';
+import RecommendIcon from '@mui/icons-material/Recommend';
 import { useSelector } from 'react-redux';
 import { Button, Textarea } from 'flowbite-react';
 import { set } from 'mongoose';
@@ -107,7 +107,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                   '!text-blue-500'
                 }`}
               >
-                <FaThumbsUp className='text-sm' />
+                <RecommendIcon className='text-sm' />
               </button>
               <p className='text-gray-400'>
                 {comment.numberOfLikes > 0 &&

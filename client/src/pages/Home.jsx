@@ -22,10 +22,12 @@ export default function Home() {
     <div>
       <HelmetTitle/>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
-        <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to my Blog</h1>
+        <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to PluseUp,</h1>
         <p className='text-gray-500 text-xs sm:text-sm'>
-        Here you'll find a variety of articles and educational content on topics
-        such as product reviews, technology news, and much more.
+        You'll find a variety of articles and educational content on topics
+        such as SEO , Web Development , product reviews, technology news, and much more..
+                     Our mission is to share knowledge and empower our readers with the information they
+                      need to grow and succeed
         </p>
         <Link
           to='/search'
@@ -43,7 +45,7 @@ export default function Home() {
           <div className='flex flex-col gap-6'>
             <h2 className='text-2xl font-semibold text-center'>Recent Posts</h2>
             <div className='flex flex-wrap gap-4'>
-              {posts.map((post) => (
+              {posts.slice(0, 3).map((post) => (
                 <PostCard key={post._id} post={post} />
               ))}
             </div>

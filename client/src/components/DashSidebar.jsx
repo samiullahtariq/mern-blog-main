@@ -1,12 +1,11 @@
 import { Sidebar } from 'flowbite-react';
-import {
-  HiUser,
-  HiArrowSmRight,
-  HiDocumentText,
-  HiOutlineUserGroup,
-  HiAnnotation,
-  HiChartPie,
-} from 'react-icons/hi';
+import PersonIcon from '@mui/icons-material/Person';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import DescriptionIcon from '@mui/icons-material/Description';
+import GroupIcon from '@mui/icons-material/Group';
+import CommentIcon from '@mui/icons-material/Comment';
+import PieChartIcon from '@mui/icons-material/PieChart';
+
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { signoutSuccess } from '../redux/user/userSlice';
@@ -48,7 +47,7 @@ export default function DashSidebar() {
             <Link to='/dashboard?tab=dash'>
               <Sidebar.Item
                 active={tab === 'dash' || !tab}
-                icon={HiChartPie}
+                icon={PieChartIcon}
                 as='div'
               >
                 Dashboard
@@ -58,7 +57,7 @@ export default function DashSidebar() {
           <Link to='/dashboard?tab=profile'>
             <Sidebar.Item
               active={tab === 'profile'}
-              icon={HiUser}
+              icon={PersonIcon}
               label={currentUser.isAdmin ? 'Admin' : 'User'}
               labelColor='dark'
               as='div'
@@ -70,7 +69,7 @@ export default function DashSidebar() {
             <Link to='/dashboard?tab=posts'>
               <Sidebar.Item
                 active={tab === 'posts'}
-                icon={HiDocumentText}
+                icon={DescriptionIcon}
                 as='div'
               >
                 Posts
@@ -82,7 +81,7 @@ export default function DashSidebar() {
               <Link to='/dashboard?tab=users'>
                 <Sidebar.Item
                   active={tab === 'users'}
-                  icon={HiOutlineUserGroup}
+                  icon={GroupIcon}
                   as='div'
                 >
                   Users
@@ -91,7 +90,7 @@ export default function DashSidebar() {
               <Link to='/dashboard?tab=comments'>
                 <Sidebar.Item
                   active={tab === 'comments'}
-                  icon={HiAnnotation}
+                  icon={CommentIcon}
                   as='div'
                 >
                   Comments
@@ -100,7 +99,7 @@ export default function DashSidebar() {
             </>
           )}
           <Sidebar.Item
-            icon={HiArrowSmRight}
+            icon={ArrowRightAltIcon}
             className='cursor-pointer'
             onClick={handleSignout}
           >

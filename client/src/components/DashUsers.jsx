@@ -1,8 +1,10 @@
 import { Modal, Table, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
@@ -93,9 +95,9 @@ export default function DashUsers() {
                   <Table.Cell>{user.email}</Table.Cell>
                   <Table.Cell>
                     {user.isAdmin ? (
-                      <FaCheck className='text-green-500' />
+                      <CheckIcon className='text-green-500' />
                     ) : (
-                      <FaTimes className='text-red-500' />
+                      <CloseIcon className='text-red-500' />
                     )}
                   </Table.Cell>
                   <Table.Cell>
@@ -134,7 +136,7 @@ export default function DashUsers() {
         <Modal.Header />
         <Modal.Body>
           <div className='text-center'>
-            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+            <ErrorOutlineIcon className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
               Are you sure you want to delete this user?
             </h3>

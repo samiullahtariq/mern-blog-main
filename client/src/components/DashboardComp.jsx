@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  HiAnnotation,
-  HiArrowNarrowUp,
-  HiDocumentText,
-  HiOutlineUserGroup,
-} from 'react-icons/hi';
+import CommentIcon from '@mui/icons-material/Comment';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import DescriptionIcon from '@mui/icons-material/Description';
+import GroupIcon from '@mui/icons-material/Group';
+
 import { Button, Table } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 
@@ -75,11 +74,11 @@ export default function DashboardComp() {
               <h3 className='text-gray-500 text-md uppercase'>Total Users</h3>
               <p className='text-2xl'>{totalUsers}</p>
             </div>
-            <HiOutlineUserGroup className='bg-teal-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <GroupIcon className='bg-teal-600  text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
           <div className='flex  gap-2 text-sm'>
             <span className='text-green-500 flex items-center'>
-              <HiArrowNarrowUp />
+              <ArrowUpwardIcon />
               {lastMonthUsers}
             </span>
             <div className='text-gray-500'>Last month</div>
@@ -93,11 +92,11 @@ export default function DashboardComp() {
               </h3>
               <p className='text-2xl'>{totalComments}</p>
             </div>
-            <HiAnnotation className='bg-indigo-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <CommentIcon className='bg-indigo-600  text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
           <div className='flex  gap-2 text-sm'>
             <span className='text-green-500 flex items-center'>
-              <HiArrowNarrowUp />
+              <ArrowUpwardIcon/>
               {lastMonthComments}
             </span>
             <div className='text-gray-500'>Last month</div>
@@ -109,11 +108,11 @@ export default function DashboardComp() {
               <h3 className='text-gray-500 text-md uppercase'>Total Posts</h3>
               <p className='text-2xl'>{totalPosts}</p>
             </div>
-            <HiDocumentText className='bg-lime-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <DescriptionIcon className='bg-lime-600  text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
           <div className='flex  gap-2 text-sm'>
             <span className='text-green-500 flex items-center'>
-              <HiArrowNarrowUp />
+              <ArrowUpwardIcon/>
               {lastMonthPosts}
             </span>
             <div className='text-gray-500'>Last month</div>
