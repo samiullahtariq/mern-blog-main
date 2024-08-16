@@ -134,6 +134,7 @@ export default function UpdatePost() {
             onChange={(e) =>
               setFormData({ ...formData, helmetdescription: e.target.value })
             }
+            value={formData.helmetdescription}
           />
           <TextInput
             type='text'
@@ -144,6 +145,7 @@ export default function UpdatePost() {
             onChange={(e) =>
               setFormData({ ...formData, helmetkeywords: e.target.value })
             }
+            value={formData.helmetkeywords}
           />
           <TextInput
             type='text'
