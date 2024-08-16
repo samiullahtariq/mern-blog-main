@@ -66,7 +66,7 @@ export default function PostPage() {
       const parser = new DOMParser();
       const doc = parser.parseFromString(post.content, 'text/html');
       const headingsList = [];
-      doc.querySelectorAll('h2, h3').forEach((heading, index) => {
+      doc.querySelectorAll('h2,').forEach((heading, index) => {
         const id = `heading-${index}`;
         heading.id = id;
         headingsList.push({ id, text: limitToFourKeywords(heading.textContent) });
@@ -119,7 +119,7 @@ export default function PostPage() {
             <div className="container">
               <div className="row">
                 <div className="col-4">
-                  <aside className="aside-sidebar">
+                  <aside className="aside-sidebar" style={{overflow : "hidden"}}>
                     <nav>
                       <h3><strong>In this Article</strong></h3>
                       <hr />
@@ -151,7 +151,7 @@ export default function PostPage() {
               <h1 className='text-xl mt-5'>Recent articles</h1>
               <div className='flex flex-wrap gap-5 mt-5 justify-center'>
                 {recentPosts &&
-                  recentPosts.slice(0 ,1).map((post) => <PostCard key={post._id} post={post} />)}
+                  recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
               </div>
             </div>
           </div>
