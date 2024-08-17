@@ -108,6 +108,16 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
 
+// Serve robots.txt
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'robots.txt'));
+});
+
+// Serve sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'sitemap.xml'));
+});
+
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
