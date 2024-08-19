@@ -1,6 +1,4 @@
-
 Sitemap: https://www.pluseup.com/sitemap.xml
-
 
 User-agent: *
 Disallow: /create-post
