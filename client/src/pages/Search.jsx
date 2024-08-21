@@ -134,6 +134,7 @@ export default function Search() {
               id='category'
             >
               <option value='Uncategorized'>Select Here</option>
+              <option value='SEO'>SEO</option>
             <option value='Coding'>Coding</option>
             <option value='DigitalMarketing'>Digital Marketing</option>
             <option value='News'>News</option>
