@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import { Footer } from 'flowbite-react';
 import { Instagram, Pinterest , Twitter } from '@mui/icons-material';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
 
 
 export default function FooterCom() {
@@ -41,16 +43,22 @@ export default function FooterCom() {
               </Footer.LinkGroup>
             </div>
             <div>
-              <Footer.Title title='Follow us' />
+              <Footer.Title title='Contact Us' />
               <Footer.LinkGroup col>
                 <Footer.Link
                   href='#'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Github
+                 <PhoneIcon/> +92 325 9747537
                 </Footer.Link>
-                <Footer.Link href='#'>Discord</Footer.Link>
+                <Footer.Link
+                  href='#'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                <EmailIcon/> pluseupblogs@gmail.com
+                </Footer.Link>
               </Footer.LinkGroup>
             </div>
             <div>
