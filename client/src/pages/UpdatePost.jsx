@@ -1,4 +1,4 @@
-import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
+import { Alert, Button, FileInput, TextInput } from 'flowbite-react';
 import 'react-quill/dist/quill.snow.css';
 import {
   getDownloadURL,
@@ -7,14 +7,13 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ReactQuill from "react-quill"
+import ReactQuill from "react-quill";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -23,9 +22,9 @@ export default function UpdatePost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
-
+  const quillRef = useRef(null);
   const navigate = useNavigate();
-    const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     try {
@@ -48,6 +47,79 @@ export default function UpdatePost() {
       console.log(error.message);
     }
   }, [postId]);
+
+  const handleContentImageUpload = (file) => {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + '-' + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          // Optionally update progress UI here
+        },
+        (error) => {
+          console.error('Upload failed:', error);
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  };
+
+  const handleImage = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (file) {
+        const url = await handleContentImageUpload(file);
+        const quill = quillRef.current.getEditor();
+        const range = quill.getSelection();
+        quill.insertEmbed(range.index, 'image', url);
+        quill.formatLine(range.index, 1, 'align', 'center');
+      }
+    };
+  };
+
+  const handleVideo = () => {
+    const quill = quillRef.current.getEditor();
+    const range = quill.getSelection();
+    const embedUrl = prompt("Please enter YouTube video URL");
+    if (embedUrl) {
+      const videoId = embedUrl.split('v=')[1] || embedUrl.split('/').pop();
+      const iframe = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+      quill.clipboard.dangerouslyPasteHTML(range.index, iframe);
+    }
+  };
+
+  const modules = useMemo(() => ({
+    toolbar: {
+      container: [
+        [{ 'header': '1'}, {'header': '2'}, {'header': '3'}, { 'font': [] }],
+        [{ size: [] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link', 'image', 'video'],  // Add video button
+        [{ 'align': [] }],
+        ['clean']
+      ],
+      handlers: {
+        image: handleImage,  // Link to handleImage function
+        video: handleVideo,  // Link to handleVideo function
+      }
+    }
+  }), []);
 
   const handleUpdloadImage = async () => {
     try {
@@ -85,6 +157,7 @@ export default function UpdatePost() {
       console.log(error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -109,6 +182,7 @@ export default function UpdatePost() {
       setPublishError('Something went wrong');
     }
   };
+
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
@@ -195,11 +269,13 @@ export default function UpdatePost() {
           />
         )}
         <ReactQuill
+          ref={quillRef}
           theme='snow'
           value={formData.content}
           placeholder='Write something...'
           className='h-72 mb-12'
           required
+          modules={modules}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}

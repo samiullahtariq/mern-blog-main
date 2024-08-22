@@ -66,7 +66,7 @@ export default function PostPage() {
       const parser = new DOMParser();
       const doc = parser.parseFromString(post.content, 'text/html');
       const headingsList = [];
-      doc.querySelectorAll('h1').forEach((heading, index) => {
+      doc.querySelectorAll('h2').forEach((heading, index) => {
         const id = `heading-${index}`;
         heading.id = id;
         headingsList.push({ id, text: limitToFourKeywords(heading.textContent) });

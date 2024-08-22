@@ -112,6 +112,17 @@ export default function CreatePost() {
     };
   };
 
+  const handleVideo = () => {
+    const quill = quillRef.current.getEditor();
+    const range = quill.getSelection();
+    const embedUrl = prompt("Please enter YouTube video URL");
+    if (embedUrl) {
+      const videoId = embedUrl.split('v=')[1] || embedUrl.split('/').pop();
+      const iframe = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+      quill.clipboard.dangerouslyPasteHTML(range.index, iframe);
+    }
+  };
+
   const modules = useMemo(() => ({
     toolbar: {
       container: [
@@ -119,12 +130,13 @@ export default function CreatePost() {
         [{size: []}],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        ['link', 'image'],
+        ['link', 'image' , 'video'],
         [{ 'align': [] }],
         ['clean']
       ],
       handlers: {
         image: handleImage,
+        video: handleVideo,
       }
     }
   }), []);
