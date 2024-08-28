@@ -13,7 +13,6 @@ import ScrollToTop from './components/ScrollToTop';
 import Error from './pages/Error'
 import Search from './pages/Search'
 import About from './pages/About'
-import Projects from './pages/Projects';
 import LazyLoad from './components/LazyLoad';
 
 const loadfooterComponent = () => import('./components/Footer');
@@ -37,7 +36,6 @@ export default function App() {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
-        <Route path='/projects' element={<Projects />} />
         <Route path='/post/:postSlug' element={<PostPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
