@@ -128,7 +128,7 @@ export default function CreatePost() {
       container: [
         [{ 'header': '1'}, {'header': '2'}, {'header': '3'} , { 'font': [] }],
         [{size: []}],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote'],
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
         ['link', 'image' , 'video'],
         [{ 'align': [] }],

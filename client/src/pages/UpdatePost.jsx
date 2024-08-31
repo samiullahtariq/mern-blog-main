@@ -106,17 +106,17 @@ export default function UpdatePost() {
   const modules = useMemo(() => ({
     toolbar: {
       container: [
-        [{ 'header': '1'}, {'header': '2'}, {'header': '3'}, { 'font': [] }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ 'header': '1'}, {'header': '2'}, {'header': '3'} , { 'font': [] }],
+        [{size: []}],
+        ['bold', 'italic', 'underline', 'strike', 'code-block' , 'blockquote'],
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        ['link', 'image', 'video'],  // Add video button
+        ['link', 'image', 'video'],  
         [{ 'align': [] }],
         ['clean']
       ],
       handlers: {
-        image: handleImage,  // Link to handleImage function
-        video: handleVideo,  // Link to handleVideo function
+        image: handleImage,  
+        video: handleVideo,  
       }
     }
   }), []);

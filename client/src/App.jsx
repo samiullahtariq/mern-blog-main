@@ -39,7 +39,7 @@ export default function App() {
         <Route path='/post/:postSlug' element={<PostPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      <LazyLoad loader={loadfooterComponent} fallback={<div>Loading...</div>} />
+      <LazyLoad loader={loadfooterComponent} fallback={<div>Loading Footer....</div>} />
     </BrowserRouter>
   );
 }

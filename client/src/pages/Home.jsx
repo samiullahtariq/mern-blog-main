@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import PostCard from '../components/PostCard';
 import HelmetTitle from '../components/HelmetTitle';
 import LazyLoad from '../components/LazyLoad';
 
 const loadHeavyComponent = () => import('../components/CallToAction');
+const loadPostcard = () => import('../components/PostCard');
 
 export default function Home() {
  
@@ -46,7 +46,7 @@ export default function Home() {
             <h2 className='text-2xl font-semibold text-center'>Recent Posts</h2>
             <div className='flex flex-wrap gap-4'>
               {posts.slice(0, 3).map((post) => (
-                <PostCard key={post._id} post={post} />
+               <LazyLoad loader={loadPostcard} key={post._id} post={post} fallback={<div>Loading Posts...</div>} /> 
               ))}
             </div>
             <Link
