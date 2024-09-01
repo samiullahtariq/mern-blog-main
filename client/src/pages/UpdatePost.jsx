@@ -20,6 +20,8 @@ export default function UpdatePost() {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
+  const [contentImageUploadProgress, setContentImageUploadProgress] = useState(null);
+  const [contentImageUploadError, setContentImageUploadError] = useState(null);
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
   const quillRef = useRef(null);
@@ -60,14 +62,18 @@ export default function UpdatePost() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // Optionally update progress UI here
+            setContentImageUploadProgress(progress.toFixed(0));
         },
         (error) => {
           console.error('Upload failed:', error);
+          setContentImageUploadError('Image upload failed');
+          setContentImageUploadProgress(null);
           reject(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setContentImageUploadProgress(null);
+            setContentImageUploadError(null);
             resolve(downloadURL);
           });
         }
@@ -280,6 +286,15 @@ export default function UpdatePost() {
             setFormData({ ...formData, content: value });
           }}
         />
+        {contentImageUploadProgress && (
+          <div className='w-16 h-16 mx-auto'>
+            <CircularProgressbar
+              value={contentImageUploadProgress}
+              text={`${contentImageUploadProgress || 0}%`}
+            />
+          </div>
+        )}
+        {contentImageUploadError && <Alert color='failure'>{contentImageUploadError}</Alert>}
         <Button type='submit' gradientDuoTone='purpleToPink'>
           Update post
         </Button>
