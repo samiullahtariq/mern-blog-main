@@ -9,6 +9,9 @@ import postRoutes from './routes/post.route.js';
 import commentRoutes from './routes/comment.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import { SitemapStream, streamToPromise } from 'sitemap';
+import { Readable } from 'stream';
+import Post from './models/post.model.js';
 
 dotenv.config();
 
@@ -103,20 +106,54 @@ app.get('/api/posts/:id', async (req, res, next) => {
   }
 });
 
-// Start server
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
 
-// Serve robots.txt
+
 app.get('/robots.txt', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'robots.txt'));
 });
 
-// Serve sitemap.xml
-app.get('/sitemap.xml', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'sitemap.xml'));
+app.get('/sitemap.xml', async (req, res) => {
+  try {
+    const cachedSitemap = await getFromRedis('sitemap');
+
+    if (cachedSitemap) {
+      res.header('Content-Type', 'application/xml');
+      return res.send(cachedSitemap);
+    }
+
+    const posts = await Post.find().select('slug'); 
+
+    const urls = posts.map(post => ({
+      url: `/post/${post.slug}`, 
+      changefreq: 'daily',
+      priority: 0.8,
+    }));
+
+    urls.push(
+      { url: '/', changefreq: 'weekly', priority: 1.0 },
+      { url: '/search', changefreq: 'monthly', priority: 0.8 },
+      { url: '/about', changefreq: 'monthly', priority: 0.5 }
+    );
+
+    const stream = new SitemapStream({ hostname: 'https://www.pluseup.com' });
+
+ 
+    const sitemap = await streamToPromise(Readable.from(urls).pipe(stream)).then(data => data.toString());
+
+    await setInRedis('sitemap', sitemap, 86400);
+
+    res.header('Content-Type', 'application/xml');
+    res.send(sitemap);
+  } catch (error) {
+    console.error('Error generating sitemap:', error);
+    res.status(500).end();
+  }
 });
+
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
