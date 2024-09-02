@@ -135,7 +135,7 @@ app.get('/sitemap.xml', async (req, res) => {
 
     urls.push(
       { url: '/', changefreq: 'weekly', priority: 1.0 },
-      { url: '/search', changefreq: 'monthly', priority: 0.8 },
+      { url: '/search', changefreq: 'monthly', priority: 0.5 },
       { url: '/about', changefreq: 'monthly', priority: 0.5 }
     );
 
