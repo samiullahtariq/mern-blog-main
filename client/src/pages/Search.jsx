@@ -2,7 +2,7 @@ import { Button, Select, TextInput } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PostCard from '../components/PostCard';
-import HelmetTitle from '../components/HelmetTitle';
+import { Helmet } from 'react-helmet';
 
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({
@@ -103,7 +103,11 @@ export default function Search() {
 
   return (
     <div>
-    <HelmetTitle/>
+     <Helmet>
+    <title>PluseUp - Blog Search</title>
+    <meta name="description" content="You can search blogs based on the category here."/>
+    <link rel="canonical" href="https://www.pluseup.com/search" />
+   </Helmet>
     <div className='flex flex-col md:flex-row'>
       <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>
         <form className='flex flex-col gap-8' onSubmit={handleSubmit}>

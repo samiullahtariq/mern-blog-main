@@ -238,6 +238,16 @@ export default function UpdatePost() {
             }
             value={formData.category}
           />
+          <TextInput
+            type='text'
+            placeholder='Add Canonical Url'
+            required
+            id='canonicalUrl'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, canonicalUrl: e.target.value })
+            }
+          />
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput

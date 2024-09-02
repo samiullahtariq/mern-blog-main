@@ -1,1 +1,46 @@
-import e from"mongoose";let postSchema=new e.Schema({userId:{type:String,required:!0},content:{type:String,required:!0},title:{type:String,required:!0,unique:!0},helmetdescription:{type:String,required:!0},helmetkeywords:{type:String,required:!0},image:{type:String},category:{type:String,default:"uncategorized"},slug:{type:String,required:!0,unique:!0}},{timestamps:!0}),Post=e.model("Post",postSchema);export default Post;
+import mongoose from "mongoose";
+
+let postSchema = new mongoose.Schema({
+  userId: { 
+    type: String, 
+    required: true 
+  },
+  content: { 
+    type: String, 
+    required: true 
+  },
+  title: { 
+    type: String, 
+    required: true, 
+    unique: true 
+  },
+  helmetdescription: { 
+    type: String, 
+    required: true 
+  },
+  helmetkeywords: { 
+    type: String, 
+    required: true 
+  },
+  canonicalUrl: {
+    type: String,
+  },
+  image: { 
+    type: String 
+  },
+  category: { 
+    type: String, 
+    default: "uncategorized" 
+  },
+  slug: { 
+    type: String, 
+    required: true, 
+    unique: true 
+  }
+}, { 
+  timestamps: true 
+});
+
+const Post = mongoose.model("Post", postSchema);
+
+export default Post;
