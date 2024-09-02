@@ -1,8 +1,8 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import Brightness3Icon from '@mui/icons-material/Brightness3';
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import Brightness3 from '@mui/icons-material/Brightness3';
+import LightMode from '@mui/icons-material/LightMode';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
@@ -72,14 +72,14 @@ export default function Header() {
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <SearchIcon />
       </Button>
-      <div className='flex gap-2 md:order-2'>
+      <div className='flex gap-2 md:order-2 '>
         <Button
-          className='w-12 h-10 hidden sm:inline text-center'
+          className='w-12 h-10 hidden sm:inline'
           color='gray'
           pill
           onClick={() => dispatch(toggleTheme())}
         >
-          {theme === 'Dark' ? <WbSunnyIcon fontSize="small" /> : <Brightness3Icon fontSize="small" />}
+          {theme === 'light' ? <LightMode fontSize="small"/> : <Brightness3 fontSize="small" />}
         </Button>
         {currentUser ? (
           <Dropdown

@@ -5,6 +5,7 @@ import PostCard from '../components/PostCard';
 import HelmetTitle from '../components/HelmetTitle';
 import LazyLoad from '../components/LazyLoad';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useSelector} from 'react-redux';
 
 const limitToFourKeywords = (text) => {
   const words = text.split(' ');
@@ -21,6 +22,7 @@ export default function PostPage() {
   const [recentPosts, setRecentPosts] = useState(null);
   const [headings, setHeadings] = useState([]);
   const [processedContent, setProcessedContent] = useState('');
+  const { theme } = useSelector((state) => state.theme);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -103,13 +105,15 @@ export default function PostPage() {
                 </Button>
               </Link>
             </div>
-
             <LazyLoadImage
               src={post && post.image}
               alt={post && post.title}
-              className='mt-10 p-3 max-h-[600px] w-full object-cover title-image rounded-image'
+              className={`mt-10 max-h-[600px] w-full object-cover title-image rounded-image ${
+                theme === 'light' ? 'border-2 border-slate-500 rounded' : ''
+              }`}
               effect='blur'
             />
+
             <div className='flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs'>
               <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
               <span className='italic'>

@@ -26,8 +26,8 @@ export default function Home() {
     <link rel="canonical" href="https://www.pluseup.com/" />
    </Helmet>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
-        <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to PluseUp,</h1>
-        <p className='text-gray-500 text-xs sm:text-sm'>
+        <h1 className='text-3xl font-bold lg:text-4xl'>Welcome to PluseUp,</h1>
+        <p className='text-gray-500'>
         You'll find a variety of articles and educational content on topics
         such as SEO , Web Development , product reviews, technology news, and much more..
                      Our mission is to share knowledge and empower our readers with the information they
@@ -35,12 +35,12 @@ export default function Home() {
         </p>
         <Link
           to='/search'
-          className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'
+          className= 'text-teal-500 font-bold hover:underline'
         >
           View all posts
         </Link>
       </div>
-      <div className='p-3 bg-amber-100 dark:bg-slate-700'>
+      <div className='p-3 bg-purple-300 dark:bg-slate-700'>
       <LazyLoad loader={loadHeavyComponent} fallback={<div>Loading...</div>} />
       </div>
 
