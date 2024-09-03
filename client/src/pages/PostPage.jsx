@@ -11,7 +11,7 @@ const limitToFourKeywords = (text) => {
   const words = text.split(' ');
   return words.slice(0, 7).join(' ');
 };
-const loadHeavyComponent = () => import('../components/CallToAction');
+
 const loadcommetnsection = () => import('../components/CommentSection');
 
 export default function PostPage() {
@@ -146,9 +146,6 @@ export default function PostPage() {
               </div>
             </div>
 
-            <div className='max-w-4xl mx-auto w-full'>
-            <LazyLoad loader={loadHeavyComponent} fallback={<div>Loading...</div>} />
-            </div>
             <LazyLoad loader={loadcommetnsection} fallback={<div>Loading comments...</div>} postId={post._id} />
 
             <div className='flex flex-col justify-center items-center mb-5'>

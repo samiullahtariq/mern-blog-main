@@ -54,15 +54,15 @@ export default function UpdatePost() {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + '-' + file.name;
-      const storageRef = ref(storage, fileName);
+      const storageRef = ref(storage, file);
       const uploadTask = uploadBytesResumable(storageRef, file);
-
+  
       uploadTask.on(
         'state_changed',
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setContentImageUploadProgress(progress.toFixed(0));
+          setContentImageUploadProgress(progress.toFixed(0));
         },
         (error) => {
           console.error('Upload failed:', error);
@@ -74,12 +74,18 @@ export default function UpdatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setContentImageUploadProgress(null);
             setContentImageUploadError(null);
-            resolve(downloadURL);
+  
+            const altText = prompt('Please enter alt text for the content image');
+            const titleText = prompt('Please enter title text for the content image');
+  
+        
+            resolve({ downloadURL, altText: altText || 'Default Alt Text', titleText: titleText || 'Default Title Text' });
           });
         }
       );
     });
   };
+  
 
   const handleImage = () => {
     const input = document.createElement('input');
@@ -138,6 +144,7 @@ export default function UpdatePost() {
       const fileName = new Date().getTime() + '-' + file.name;
       const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
+  
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -153,7 +160,16 @@ export default function UpdatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, image: downloadURL });
+  
+          
+            const altText = prompt('Please enter alt text for the main title image');
+  
+          
+            setFormData({
+              ...formData,
+              image: downloadURL,
+              imageAlt: altText || 'Default Alt Text' 
+            });
           });
         }
       );
@@ -163,6 +179,7 @@ export default function UpdatePost() {
       console.log(error);
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -280,7 +297,8 @@ export default function UpdatePost() {
           <LazyLoadImage
           effect='blur'
             src={formData.image}
-            alt='upload'
+            alt={formData.imageAlt}
+            title={formData.title}
             className='w-full h-72 object-cover'
           />
         )}

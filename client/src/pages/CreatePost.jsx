@@ -53,7 +53,14 @@ export default function CreatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, image: downloadURL });
+  
+            const altText = prompt('Please enter alt text for the main title image');
+  
+            setFormData({
+              ...formData,
+              image: downloadURL,
+              imageAlt: altText || 'Default Alt Text' 
+            });
           });
         }
       );
@@ -63,6 +70,7 @@ export default function CreatePost() {
       console.log(error);
     }
   };
+  
 
   const handleContentImageUpload = (file) => {
     return new Promise((resolve, reject) => {
@@ -95,6 +103,7 @@ export default function CreatePost() {
     });
   };
 
+  
   const handleImage = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -104,13 +113,24 @@ export default function CreatePost() {
       const file = input.files[0];
       if (file) {
         const url = await handleContentImageUpload(file);
+        const altText = prompt('Please enter alt text for the image');
+        const titleText = prompt('Please enter title text for the image');
+  
         const quill = quillRef.current.getEditor();
         const range = quill.getSelection();
+
         quill.insertEmbed(range.index, 'image', url);
         quill.formatLine(range.index, 1, 'align', 'center');
+ 
+        const imgElement = quill.root.querySelector(`img[src="${url}"]`);
+        if (imgElement) {
+          imgElement.setAttribute('alt', altText || 'Default Alt Text');
+          imgElement.setAttribute('title', titleText || 'Default Title Text');
+        }
       }
     };
   };
+  
 
   const handleVideo = () => {
     const quill = quillRef.current.getEditor();
@@ -252,7 +272,8 @@ export default function CreatePost() {
         {formData.image && (
           <LazyLoadImage
             src={formData.image}
-            alt='upload'
+            alt={formData.imageAlt}
+            title={formData.title}
             className='w-full h-72 object-cover'
           />
         )}
