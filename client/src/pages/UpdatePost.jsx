@@ -54,7 +54,7 @@ export default function UpdatePost() {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + '-' + file.name;
-      const storageRef = ref(storage, file);
+      const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
   
       uploadTask.on(
@@ -74,12 +74,7 @@ export default function UpdatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setContentImageUploadProgress(null);
             setContentImageUploadError(null);
-  
-            const altText = prompt('Please enter alt text for the content image');
-            const titleText = prompt('Please enter title text for the content image');
-  
-        
-            resolve({ downloadURL, altText: altText || 'Default Alt Text', titleText: titleText || 'Default Title Text' });
+            resolve(downloadURL);
           });
         }
       );
@@ -96,14 +91,23 @@ export default function UpdatePost() {
       const file = input.files[0];
       if (file) {
         const url = await handleContentImageUpload(file);
+        const altText = prompt('Please enter alt text for the image');
+        const titleText = prompt('Please enter title text for the image');
+  
         const quill = quillRef.current.getEditor();
         const range = quill.getSelection();
+
         quill.insertEmbed(range.index, 'image', url);
         quill.formatLine(range.index, 1, 'align', 'center');
+ 
+        const imgElement = quill.root.querySelector(`img[src="${url}"]`);
+        if (imgElement) {
+          imgElement.setAttribute('alt', altText || 'Default Alt Text');
+          imgElement.setAttribute('title', titleText || 'Default Title Text');
+        }
       }
     };
   };
-
   const handleVideo = () => {
     const quill = quillRef.current.getEditor();
     const range = quill.getSelection();
@@ -264,6 +268,7 @@ export default function UpdatePost() {
             onChange={(e) =>
               setFormData({ ...formData, canonicalUrl: e.target.value })
             }
+            value={formData.canonicalUrl}
           />
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
