@@ -26,12 +26,14 @@ export default function Home() {
     <link rel="canonical" href="https://www.pluseup.com/" />
    </Helmet>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
-        <h1 className='text-3xl font-bold lg:text-4xl'>Welcome to PluseUp,</h1>
+        <h1 className='text-3xl font-bold lg:text-4xl'>Welcome to PluseUp
+</h1>
         <p className='text-gray-500'>
-        You'll find a variety of articles and educational content on topics
-        such as SEO , Web Development , product reviews, technology news, and much more..
-                     Our mission is to share knowledge and empower our readers with the information they
-                      need to grow and succeed
+        At PluseUp, we specialize in increasing your online visibility and driving targeted traffic to your website.
+         Our expertise in SEO helps businesses achieve higher search engine rankings and deliver measurable results.
+          Whether you need on-page optimization, link building, or a comprehensive digital strategy, we're here to 
+          help you succeed in the digital landscape. Discover how we can transform your online presence and grow 
+          your business.
         </p>
         <Link
           to='/search'

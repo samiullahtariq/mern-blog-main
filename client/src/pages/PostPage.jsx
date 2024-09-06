@@ -1,25 +1,23 @@
 import { Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import PostCard from '../components/PostCard';
 import HelmetTitle from '../components/HelmetTitle';
 import LazyLoad from '../components/LazyLoad';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const limitToFourKeywords = (text) => {
   const words = text.split(' ');
   return words.slice(0, 7).join(' ');
 };
 
-const loadcommetnsection = () => import('../components/CommentSection');
+const loadCommentSection = () => import('../components/CommentSection');
 
 export default function PostPage() {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
-  const [recentPosts, setRecentPosts] = useState(null);
   const [headings, setHeadings] = useState([]);
   const [processedContent, setProcessedContent] = useState('');
   const { theme } = useSelector((state) => state.theme);
@@ -28,40 +26,23 @@ export default function PostPage() {
     const fetchPost = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
+        const res = await fetch(`/api/post/${postSlug}`);
         const data = await res.json();
         if (!res.ok) {
           setError(true);
           setLoading(false);
           return;
         }
-        if (res.ok) {
-          setPost(data.posts[0]);
-          setLoading(false);
-          setError(false);
-        }
+        setPost(data);  // Assuming data is the post object
+        setLoading(false);
+        setError(false);
       } catch (error) {
         setError(true);
         setLoading(false);
       }
-    };
+    };    
     fetchPost();
   }, [postSlug]);
-
-  useEffect(() => {
-    try {
-      const fetchRecentPosts = async () => {
-        const res = await fetch(`/api/post/getposts?limit=3`);
-        const data = await res.json();
-        if (res.ok) {
-          setRecentPosts(data.posts);
-        }
-      };
-      fetchRecentPosts();
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, []);
 
   useEffect(() => {
     if (post) {
@@ -85,6 +66,9 @@ export default function PostPage() {
         <Spinner size='xl' />
       </div>
     );
+
+  if (error)
+    return <div>Error loading post.</div>;
 
   return (
     <>
@@ -146,15 +130,7 @@ export default function PostPage() {
               </div>
             </div>
 
-            <LazyLoad loader={loadcommetnsection} fallback={<div>Loading comments...</div>} postId={post._id} />
-
-            <div className='flex flex-col justify-center items-center mb-5'>
-              <h1 className='text-xl mt-5'>Recent articles</h1>
-              <div className='flex flex-wrap gap-5 mt-5 justify-center'>
-                {recentPosts &&
-                  recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
-              </div>
-            </div>
+            <LazyLoad loader={loadCommentSection} fallback={<div>Loading comments...</div>} postId={post._id} />
           </div>
         </div>
       </main>

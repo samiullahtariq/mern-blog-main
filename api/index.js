@@ -1,21 +1,21 @@
 import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import compressionMiddleware from './middleware/compression.js';
+import errorHandler from './middleware/errorHandler.js';
+import { generateSitemap } from './sitemap/generateSitemap.js';
+import routes from './routes/routing.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import compression from 'compression';
-import axios from 'axios';
-import userRoutes from './routes/user.route.js';
-import authRoutes from './routes/auth.route.js';
-import postRoutes from './routes/post.route.js';
-import commentRoutes from './routes/comment.route.js';
-import cookieParser from 'cookie-parser';
-import path from 'path';
-import { SitemapStream, streamToPromise } from 'sitemap';
-import { Readable } from 'stream';
-import Post from './models/post.model.js';
 
+
+const app = express();
+const __dirname = path.resolve();
+
+// Database connection
+// Connect to MongoDB
 dotenv.config();
 
-// Connect to MongoDB
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
@@ -25,151 +25,38 @@ mongoose
     console.log(err);
   });
 
-const __dirname = path.resolve();
 
-
-const app = express();
+// Middleware
 app.set('trust proxy', true);
-app.use(compression({
-  level : 6,
-  threshold : 10*1000,
-  filter:(req ,res)=>{
-    if(req.headers['x-no-compression']){
-      return false;
-    }
-    return compression.filter(req,res)
-  }
-}))
+app.use(compressionMiddleware);
 app.use(express.json());
 app.use(cookieParser());
 
-// Upstash Redis REST API setup
-const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
-const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+// Routes
+app.use(routes);
 
-// Function to get data from Upstash Redis
-const getFromRedis = async (key) => {
-  try {
-    const response = await axios.get(`${redisUrl}/get/${key}`, {
-      headers: {
-        Authorization: `Bearer ${redisToken}`,
-      },
-    });
-    return response.data.result;
-  } catch (error) {
-    console.error('Error fetching from Redis:', error);
-    return null;
-  }
-};
+// Static files
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
-// Function to set data in Upstash Redis with TTL
-const setInRedis = async (key, value, ttlSeconds) => {
-  try {
-    await axios.post(`${redisUrl}/set/${key}/${value}`, null, {
-      headers: {
-        Authorization: `Bearer ${redisToken}`,
-      },
-      params: {
-        ttl: 3600, // Set TTL in seconds
-      }
-    });
-  } catch (error) {
-    console.error('Error setting value in Redis:', error);
-  }
-};
+// Sitemap
+app.get('/sitemap.xml', generateSitemap);
 
-// Example usage: Caching with TTL
-app.get('/api/posts/:id', async (req, res, next) => {
-  const postId = req.params.id;
-
-  try {
-    // Check if the post is in the cache
-    const cachedPost = await getFromRedis(`post:${postId}`);
-
-    if (cachedPost) {
-      return res.status(200).json(JSON.parse(cachedPost));
-    }
-
-    // Fetch post from the database if not in cache
-    const post = await Post.findById(postId);
-
-    if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
-    }
-
-    // Store the post in Redis cache with an expiration time (e.g., 3600 seconds = 1 hour)
-    await setInRedis(`post:${postId}`, JSON.stringify(post), 3600);
-
-    res.status(200).json(post);
-  } catch (err) {
-    next(err);
-  }
-});
-
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
-});
-
-
+// Robots.txt
 app.get('/robots.txt', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'robots.txt'));
 });
 
-app.get('/sitemap.xml', async (req, res) => {
-  try {
-    const cachedSitemap = await getFromRedis('sitemap');
-
-    if (cachedSitemap) {
-      res.header('Content-Type', 'application/xml');
-      return res.send(cachedSitemap);
-    }
-
-    const posts = await Post.find().select('slug'); 
-
-    const urls = posts.map(post => ({
-      url: `/post/${post.slug}`, 
-      changefreq: 'daily',
-      priority: 0.8,
-    }));
-
-    urls.push(
-      { url: '/', changefreq: 'weekly', priority: 1.0 },
-    );
-
-    const stream = new SitemapStream({ hostname: 'https://www.pluseup.com' });
-
- 
-    const sitemap = await streamToPromise(Readable.from(urls).pipe(stream)).then(data => data.toString());
-
-    await setInRedis('sitemap', sitemap, 86400);
-
-    res.header('Content-Type', 'application/xml');
-    res.send(sitemap);
-  } catch (error) {
-    console.error('Error generating sitemap:', error);
-    res.status(500).end();
-  }
-});
-
-
-app.use('/api/user', userRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/post', postRoutes);
-app.use('/api/comment', commentRoutes);
-
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
+// Catch-all route
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || 'Internal Server Error';
-  res.status(statusCode).json({
-    success: false,
-    statusCode,
-    message,
-  });
+// Error handling
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}!`);
 });
+
