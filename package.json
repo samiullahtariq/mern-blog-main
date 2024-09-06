@@ -26,7 +26,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.2",
     "nodemon": "^3.0.2",
-    "pako": "^2.1.0",
     "sitemap": "^8.0.0",
     "stream": "^0.0.3"
   }

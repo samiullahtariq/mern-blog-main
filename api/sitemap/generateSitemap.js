@@ -30,7 +30,7 @@ export const generateSitemap = async (req, res) => {
 
     urls.push({ url: '/', changefreq: 'weekly', priority: 1.0 });
 
-    const stream = new SitemapStream({ hostname: 'http://localhost:3000/' });
+    const stream = new SitemapStream({ hostname: 'https://www.pluseup.com/' });
     const sitemap = await streamToPromise(Readable.from(urls).pipe(stream)).then(data => data.toString());
 
     // Cache the generated sitemap
