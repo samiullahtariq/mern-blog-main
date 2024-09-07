@@ -1,3 +1,4 @@
+import 'react-quill/dist/quill.snow.css';
 import { Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -5,6 +6,7 @@ import HelmetTitle from '../components/HelmetTitle';
 import LazyLoad from '../components/LazyLoad';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useSelector } from 'react-redux';
+
 
 const limitToFourKeywords = (text) => {
   const words = text.split(' ');
@@ -123,10 +125,13 @@ export default function PostPage() {
                     </nav>
                   </aside>
                 </div>
+                
                 <div
-                  className="col-8 p-3 max-w-2xl mx-auto w-full post-content"
-                  dangerouslySetInnerHTML={{ __html: processedContent }}
-                ></div>
+                  className="col-8 p-3 max-w-2xl mx-auto w-full post-content ql-snow"
+                >
+                  <div className="ql-editor" dangerouslySetInnerHTML={{ __html: processedContent }}>
+                </div>
+                </div>  
               </div>
             </div>
 
