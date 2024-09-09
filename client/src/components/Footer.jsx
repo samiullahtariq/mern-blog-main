@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import { Footer } from 'flowbite-react';
-import { Instagram, Pinterest , Twitter } from '@mui/icons-material';
+import { Instagram, Pinterest} from '@mui/icons-material';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 
 export default function FooterCom() {
@@ -78,10 +79,10 @@ export default function FooterCom() {
             year={new Date().getFullYear()}
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
-            <Footer.Icon href='#' icon={Instagram}/>
-            <Footer.Icon href='#' icon={FacebookOutlinedIcon}/>
-            <Footer.Icon href='#' icon={Pinterest}/>
-            <Footer.Icon href='#' icon={Twitter}/>
+            <Footer.Icon href='https://www.instagram.com/pluseupblogs/' icon={Instagram}/>
+            <Footer.Icon href='https://www.facebook.com/profile.php?id=61565491924616' icon={FacebookOutlinedIcon}/>
+            <Footer.Icon href='https://www.pinterest.com/pluseupblogs/' icon={Pinterest}/>
+            <Footer.Icon href='https://www.linkedin.com/company/pluseup/' icon={LinkedInIcon}/>
 
           </div>
         </div>
