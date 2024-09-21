@@ -28,11 +28,10 @@ export default function FooterCom() {
               <Footer.Title title='About' />
               <Footer.LinkGroup col>
                 <Footer.Link
-                  href='https://www.100jsprojects.com'
-                  target='_blank'
+                  href='/tools'
                   rel='noopener noreferrer'
                 >
-                  100 JS Projects
+                  Tools
                 </Footer.Link>
                 <Footer.Link
                   href='/about'

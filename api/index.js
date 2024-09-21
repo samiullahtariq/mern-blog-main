@@ -7,6 +7,7 @@ import { generateSitemap } from './sitemap/generateSitemap.js';
 import routes from './routes/routing.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { generateKeywords } from './controllers/postkeyword.controller.js';
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(cookieParser());
 // Routes
 app.use(routes);
 
+app.post('/api/generate-keywords', generateKeywords);
 // Static files
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
@@ -45,6 +47,7 @@ app.get('/sitemap.xml', generateSitemap);
 app.get('/robots.txt', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'robots.txt'));
 });
+
 
 // Catch-all route
 app.get('*', (req, res) => {
