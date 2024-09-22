@@ -29,9 +29,9 @@ export const generateSitemap = async (req, res) => {
     }));
 
     urls.push({ url: '/', changefreq: 'weekly', priority: 1.0 });
-    urls.push({ url: '/keyword-extractor', changefreq: 'weekly', priority: 8.0 });
-    urls.push({ url: '/generate-keywords', changefreq: 'weekly', priority: 8.0 });
-    urls.push({ url: '/tip-calculator', changefreq: 'weekly', priority: 8.0 });
+    urls.push({ url: '/keyword-extractor', changefreq: 'weekly', priority: 0.8 });
+    urls.push({ url: '/generate-keywords', changefreq: 'weekly', priority: 0.8 });
+    urls.push({ url: '/tip-calculator', changefreq: 'weekly', priority: 0.8 });
 
     const stream = new SitemapStream({ hostname: 'https://www.pluseup.com/' });
     const sitemap = await streamToPromise(Readable.from(urls).pipe(stream)).then(data => data.toString());
