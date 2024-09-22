@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import ExtractIcon from '@mui/icons-material/Extension';
 import { removeStopwords } from 'stopword';
+import { Helmet } from "react-helmet";
 
 const customStopWords = ['not', 'when', , 'two' ,'but', 'they', 'you' , 'your' ,'and' ,'can' ,'the' , 'more' , 'with' , 'for' , 'that', 'this' ,'which' , 'their' , 'how',
     'help' , 'between' , 'post' , 'blog' , 'are' , 'into' , 'often' ,'will' , 'use' , 'out' , 'also' , 'user' , 'have' ,
@@ -64,6 +65,14 @@ function KeywordExtractor() {
 
   return (
     <Paper elevation={3} style={{ padding: '20px', maxWidth: '600px', margin: '20px auto' }}>
+       <Helmet>
+    <title>Extract Keywords from Text Instantly</title>
+    <meta name="description" content="Use our keyword extractor tool to quickly extract 
+    keywords from any text. Enhance your SEO strategy by identifying important keywords for content optimization"/>
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://www.pluseup.com/keyword-extractor" />
+   </Helmet>
       <Typography variant="h5" gutterBottom>
         Frequency and Keyword Extractor
       </Typography>

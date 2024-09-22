@@ -3,7 +3,7 @@ import {ListItem, ListItemIcon, ListItemText, Paper, Typography, Grid } from '@m
 import TipIcon from '@mui/icons-material/AttachMoney'; 
 import KeywordIcon from '@mui/icons-material/Extension';
 import { Link } from 'react-router-dom';
-
+import { Helmet } from "react-helmet";
 function Tools() {
   const tools = [
     {
@@ -25,6 +25,13 @@ function Tools() {
 
   return (
     <Paper elevation={3} style={{ padding: '20px', maxWidth: '800px', margin: '20px auto'}}>
+       <Helmet>
+    <title>Tools Page: Useful Online Tools for Everyone</title>
+    <meta name="description" content="Discover a variety of handy online tools designed to simplify tasks 
+    and improve productivity. Explore our collection and find the right tool for your needs."/>
+   <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://www.pluseup.com/tools" />
+   </Helmet>
       <Typography variant="h5" gutterBottom align="center">
         Tools
       </Typography>

@@ -16,6 +16,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Helmet } from "react-helmet";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -81,6 +82,14 @@ export default function LSIKeywordGenerator() {
 
   return (
     <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px', backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+     <Helmet>
+    <title>LSI Keyword Generator</title>
+    <meta name="description" content="Generate find Google autocomplete suggestions for effective SEO. 
+    Use our LSI keyword generator to boost your content strategy and rankings."/>
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://www.pluseup.com/generate-keywords" />
+   </Helmet>
       <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Find Great Keywords Using Google Autocomplete</h1>
       <TextField
         label="Seed Keyword"

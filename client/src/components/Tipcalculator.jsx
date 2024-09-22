@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper } from '@mui/material';
+import { Helmet } from "react-helmet";
 
 function TipCalculator() {
   const [price, setPrice] = useState('');
@@ -31,13 +32,22 @@ function TipCalculator() {
   };
 
   return (
+    <>
+     <Helmet>
+    <title>Tip Calculator: Calculate Tip & Split Bill Easily</title>
+    <meta name="description" content="Calculate tips for tattoo artists, hair stylists, nail salons, 
+    and hairdressers with our tip calculator. Easily split bills and find the perfect tip amount for any service."/>
+     <meta name="robots" content="index, follow" />
+     <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://www.pluseup.com/tip-calculator" />
+   </Helmet>
     <Paper elevation={3} style={{ padding: '20px', maxWidth: '400px', margin: '20px auto' }}>
       <Typography variant="h5" gutterBottom align="center">
         Tip Calculator
       </Typography>
       
       <TextField
-        label="Price ($)"
+        label="Bill Amount($)"
         type="number"
         fullWidth
         variant="outlined"
@@ -57,7 +67,7 @@ function TipCalculator() {
       />
 
       <TextField
-        label="Number of People"
+        label="Split Bill? Enter Number of People"
         type="number"
         fullWidth
         variant="outlined"
@@ -94,6 +104,7 @@ function TipCalculator() {
         </Paper>
       )}
     </Paper>
+    </>
   );
 }
 
