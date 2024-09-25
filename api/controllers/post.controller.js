@@ -132,6 +132,7 @@ export const updatepost = async (req, res, next) => {
           image: req.body.image,
           helmetdescription: req.body.helmetdescription,
           helmetkeywords: req.body.helmetkeywords,
+          canonicalUrl : req.body.canonicalUrl
         },
       },
       { new: true }
