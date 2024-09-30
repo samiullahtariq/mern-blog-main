@@ -90,7 +90,7 @@ export default function LSIKeywordGenerator() {
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/generate-keywords" />
    </Helmet>
-      <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Find Great Keywords Using Google Autocomplete</h1>
+      <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' , color : 'black' }}>Find Great Keywords Using Google Autocomplete</h1>
       <TextField
         label="Seed Keyword"
         variant="outlined"
