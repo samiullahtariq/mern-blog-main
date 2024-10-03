@@ -8,6 +8,8 @@ import {
   signInFailure,
 } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
+import { Helmet } from "react-helmet";
+
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -45,6 +47,11 @@ export default function SignIn() {
   return (
     <div className='min-h-screen mt-20'>
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
+      <Helmet>
+    <title>SignIn- PluseUp</title>
+    <meta name="description" content="At PluseUp, we are provide SEO solutions focused on boosting online visibility and driving long-term growth."/>
+    <meta name="robots" content="none" />
+   </Helmet>
         {/* left */}
         <div className='flex-1'>
           <Link to='/' className='font-bold dark:text-white text-4xl'>

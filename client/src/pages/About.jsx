@@ -8,6 +8,7 @@ export default function About() {
     <title>About PluseUp: Who are we and what is our mission - PluseUp</title>
     <meta name="description" content="At PluseUp, we are provide SEO solutions focused on boosting online visibility and driving long-term growth."/>
     <link rel="canonical" href="https://www.pluseup.com/about" />
+    <meta name="robots" content="index, follow" />
    </Helmet>
       <div className="max-w-2xl mx-auto p-3">
         <div>

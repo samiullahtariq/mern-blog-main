@@ -6,7 +6,6 @@ Disallow: /update-post
 Disallow: /sign-in
 Disallow: /sign-up
 Disallow: /dashboard
-Disallow: /about
 
 
 # Allow all other paths

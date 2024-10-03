@@ -6,6 +6,7 @@ import DashPosts from '../components/DashPosts';
 import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
 import DashboardComp from '../components/DashboardComp';
+import { Helmet } from "react-helmet";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -20,6 +21,11 @@ export default function Dashboard() {
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
       <div className='md:w-56'>
+      <Helmet>
+    <title>Admin Dashboard - PluseUp</title>
+    <meta name="description" content="At PluseUp, we are provide SEO solutions focused on boosting online visibility and driving long-term growth."/>
+    <meta name="robots" content="none" />
+   </Helmet>
         {/* Sidebar */}
         <DashSidebar />
       </div>
