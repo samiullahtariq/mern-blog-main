@@ -79,7 +79,7 @@ export default function FooterCom() {
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
             <Footer.Icon href='https://www.instagram.com/pluseupblogs/' icon={Instagram}/>
-            <Footer.Icon href='https://www.facebook.com/profile.php?id=61565491924616' icon={FacebookOutlinedIcon}/>
+            <Footer.Icon href='https://www.facebook.com/profile.php?id=61565492825465&mibextid=LQQJ4d' icon={FacebookOutlinedIcon}/>
             <Footer.Icon href='https://www.pinterest.com/pluseupblogs/' icon={Pinterest}/>
             <Footer.Icon href='https://www.linkedin.com/company/pluseup/' icon={LinkedInIcon}/>
 

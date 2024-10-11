@@ -25,10 +25,10 @@ export default function Home() {
     <meta name="description" content="At PluseUp, we are offer SEO solutions focused on boosting online visibility and driving long-term growth with customer Satisfaction."/>
     <link rel="canonical" href="https://www.pluseup.com/" />
    </Helmet>
-      <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
+      <div className='flex flex-col gap-6 p-6 md:p-28 md:px-3 max-w-6xl mx-auto '>
         <h1 className='text-3xl font-bold lg:text-4xl'>Welcome to PluseUp
 </h1>
-        <p className='text-gray-500'>
+        <p className='text-gray-500 text-justify'>
         At PluseUp, we specialize in increasing your online visibility and driving targeted traffic to your website.
          Our expertise in SEO helps businesses achieve higher search engine rankings and deliver measurable results.
           Whether you need on-page optimization, link building, or a comprehensive digital strategy, we're here to 
