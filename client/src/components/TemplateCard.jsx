@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { Helmet } from 'react-helmet';
 
 export default function TemplateCard() {
   const [templates, setTemplates] = useState([]);
@@ -28,6 +29,14 @@ export default function TemplateCard() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <Helmet>
+    <title>Presentation Templates - PluseUp</title>
+    <meta name="description" content="Download our Presentation Templates for Google Slides & PowerPoint! ✓ Free ✓ Customizable ✓ Perfect for professional insights"/>
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://www.pluseup.com/theme" />
+   </Helmet>
+
       {templates.map((template) => (
         <div key={template._id} className='group relative w-full border border-teal-500 hover:border-2 h-[360px] overflow-hidden rounded-lg sm:w-[340px] transition-all duration-500 ease-in-out'>
           <Link to={`/theme/${template.slug}`}>

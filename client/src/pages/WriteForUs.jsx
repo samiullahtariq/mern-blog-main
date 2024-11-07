@@ -4,6 +4,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import CreateIcon from '@mui/icons-material/Create';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Helmet } from "react-helmet";
 
 export default function WriteForUs() {
   const [posts, setPosts] = useState([]);
@@ -19,6 +20,12 @@ export default function WriteForUs() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+       <Helmet>
+    <title>Write For Us - SEO and Digital Marketing</title>
+    <meta name="description" content="Passionate about SEO, digital marketing, or content strategy? Write for us! Share your insights, tips, and unique perspectives with our audience."/>
+   <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.pluseup.com/write-for-us" />
+   </Helmet>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 dark:text-white sm:tracking-tight">
           Write for Us

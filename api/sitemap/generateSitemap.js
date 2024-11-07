@@ -42,7 +42,8 @@ export const generateSitemap = async (req, res) => {
       { url: '/', changefreq: 'weekly', priority: 1.0 },
       { url: '/keyword-extractor', changefreq: 'weekly', priority: 0.8 },
       { url: '/generate-keywords', changefreq: 'weekly', priority: 0.8 },
-      { url: '/tip-calculator', changefreq: 'weekly', priority: 0.8 }
+      { url: '/tip-calculator', changefreq: 'weekly', priority: 0.8 },
+      { url: '/write-for-us', changefreq: 'weekly', priority: 0.8 }
     ];
 
     const stream = new SitemapStream({ hostname: 'https://www.pluseup.com/' });

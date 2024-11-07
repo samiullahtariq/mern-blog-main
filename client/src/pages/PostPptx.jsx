@@ -3,7 +3,7 @@ import { useParams , Link } from 'react-router-dom';
 import { Button, Card, Alert, Spinner } from 'flowbite-react';
 import { GetApp } from '@mui/icons-material';
 import LazyLoad from '../components/LazyLoad';
-
+import HelmetTitle from '../components/HelmetTitle';
 
 const loadPostcard = () => import('../components/PostCard');
 
@@ -63,6 +63,7 @@ export default function PostPptx() {
 
   return (
     <div className="max-w-7xl mx-auto p-4">
+       <HelmetTitle post={template.pptFile} />
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-2/3">
           <h1 className="text-3xl font-bold mb-4">{template.pptFile.title}</h1>
