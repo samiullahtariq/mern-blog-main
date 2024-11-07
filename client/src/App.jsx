@@ -18,6 +18,11 @@ import LSIKeywordGenerator from './components/LSIKeywordGenerator';
 import KeywordExtractor from './components/KeywordExtractor'
 import TipCalculator from './components/Tipcalculator';
 import Tools from './pages/Tools';
+import PPTXUpload from './components/PPTXUpload';
+import PPTXUpdate from './components/PPTXUpdate';
+import PostPptx from './pages/PostPptx';
+import TemplateCard from './components/TemplateCard';
+import WriteForUs from "./pages/WriteForUs";
 
 const loadfooterComponent = () => import('./components/Footer');
 
@@ -37,14 +42,19 @@ export default function App() {
         <Route path='/generate-keywords' element={<LSIKeywordGenerator />} />
         <Route path='/tip-calculator' element={<TipCalculator/>} />
         <Route path='/tools' element={<Tools/>} />
+        <Route path='/theme' element={<TemplateCard/>} />
+        <Route path='/write-for-us' element={<WriteForUs/>} />
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>
         <Route element={<OnlyAdminPrivateRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:postId' element={<UpdatePost />} />
+          <Route path='/upload-pptx' element={<PPTXUpload />} />
+          <Route path='/update-pptx/:pptxId' element={<PPTXUpdate />} />
         </Route>
         <Route path='/post/:postSlug' element={<PostPage />} />
+        <Route path='/theme/:themeSlug' element={<PostPptx/>} />
         <Route path="*" element={<Error />} />
       </Routes>
       <LazyLoad loader={loadfooterComponent} fallback={<div>Loading Footer....</div>} />

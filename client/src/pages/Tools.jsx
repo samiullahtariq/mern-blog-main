@@ -24,7 +24,7 @@ function Tools() {
   ];
 
   return (
-    <Paper elevation={3} style={{ padding: '20px', maxWidth: '800px', margin: '20px auto'}}>
+    <Paper className="dark:bg-gray-900 dark:text-white" elevation={3} style={{ padding: '20px', maxWidth: '800px', margin: '20px auto'}}>
        <Helmet>
     <title>Tools Page: Useful Online Tools for Everyone</title>
     <meta name="description" content="Discover a variety of handy online tools designed to simplify tasks 
@@ -52,9 +52,10 @@ function Tools() {
                 justifyContent: 'center',
                 textDecoration: 'none',
                 color: 'inherit',
+                
               }}
             >
-              <ListItemIcon style={{ fontSize: '40px', margin: '0 auto' }}>
+              <ListItemIcon className="dark:text-white" style={{ fontSize: '40px', margin: '0 auto' }}>
                 {tool.icon}
               </ListItemIcon>
               <ListItemText primary={tool.name} style={{ marginTop: '10px' }} />

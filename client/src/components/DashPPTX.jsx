@@ -1,120 +1,112 @@
+import React, { useEffect, useState } from 'react';
 import { Modal, Table, Button } from 'flowbite-react';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-
-export default function DashPosts() {
+export default function DashPPTX() {
   const { currentUser } = useSelector((state) => state.user);
-  const [userPosts, setUserPosts] = useState([]);
+  const [pptxFiles, setPptxFiles] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [postIdToDelete, setPostIdToDelete] = useState('');
+  const [pptxIdToDelete, setPptxIdToDelete] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPPTXFiles = async () => {
       try {
-        const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`);
+        setLoading(true);
+        const res = await fetch(`/api/ppt/getpptx-file?userId=${currentUser._id}`);
+        if (!res.ok) throw new Error('Failed to fetch files');
         const data = await res.json();
-        if (res.ok) {
-          setUserPosts(data.posts);
-          if (data.posts.length < 9) {
-            setShowMore(false);
-          }
-        }
+        
+        // Update this line to match your backend response structure
+        setPptxFiles(data.pptxfiles);
+        setShowMore(data.pptxfiles.length >= 9);
+        setLoading(false);
       } catch (error) {
-        console.log(error.message);
+        console.error('Error fetching files:', error);
+        setError('Failed to load files. Please try again.');
+        setLoading(false);
       }
     };
-    if (currentUser.isAdmin) {
-      fetchPosts();
+    if (currentUser?.isAdmin) {
+      fetchPPTXFiles();
     }
   }, [currentUser._id]);
-
+  
+  
   const handleShowMore = async () => {
-    const startIndex = userPosts.length;
+    const startIndex = pptxFiles.length;
     try {
-      const res = await fetch(
-        `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
-      );
+      const res = await fetch(`/api/ppt/getpptx-file?userId=${currentUser._id}&startIndex=${startIndex}`);
+      if (!res.ok) throw new Error('Failed to fetch more files');
       const data = await res.json();
-      if (res.ok) {
-        setUserPosts((prev) => [...prev, ...data.posts]);
-        if (data.posts.length < 9) {
-          setShowMore(false);
-        }
-      }
+      
+      // Again, adjust this line to match your backend response structure
+      setPptxFiles((prev) => [...prev, ...data.pptxfiles]);
+      setShowMore(data.pptxfiles.length >= 9);
     } catch (error) {
-      console.log(error.message);
+      console.error('Error fetching more files:', error);
+      setError('Failed to load more files. Please try again.');
     }
   };
+  
 
-  const handleDeletePost = async () => {
+  const handleDeletePPTX = async () => {
     setShowModal(false);
     try {
-      const res = await fetch(
-        `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
-        {
-          method: 'DELETE',
-        }
+      const res = await fetch(`/api/ppt/delete-pptx/${pptxIdToDelete}/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) throw new Error('Failed to delete file');
+      setPptxFiles((prev) =>
+        prev.filter((file) => file._id !== pptxIdToDelete)
       );
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        setUserPosts((prev) =>
-          prev.filter((post) => post._id !== postIdToDelete)
-        );
-      }
     } catch (error) {
-      console.log(error.message);
+      console.error('Error deleting file:', error);
+      setError('Failed to delete file. Please try again.');
     }
   };
+  
+  if (loading) return <div className="text-center">Loading...</div>;
+  if (error) return <div className="text-center text-red-500">{error}</div>;
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser.isAdmin && userPosts.length > 0 ? (
+      {currentUser.isAdmin && pptxFiles.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>
               <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post title</Table.HeadCell>
+              <Table.HeadCell>File name</Table.HeadCell>
+              <Table.HeadCell>Title</Table.HeadCell>
               <Table.HeadCell>Category</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
               <Table.HeadCell>
                 <span>Edit</span>
               </Table.HeadCell>
             </Table.Head>
-            {userPosts.map((post) => (
-              <Table.Body className='divide-y' key={post._id}>
-                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                  <Table.Cell>
-                    {new Date(post.updatedAt).toLocaleDateString()}
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Link to={`/post/${post.slug}`}>
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className='w-20 h-10 object-cover bg-gray-500'
-                      />
-                    </Link>
-                  </Table.Cell>
+            <Table.Body className='divide-y'>
+              {pptxFiles.map((file) => (
+                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800' key={file._id}>
+                  <Table.Cell>{new Date(file.updatedAt).toLocaleDateString()}</Table.Cell>
+                  <Table.Cell>{file.fileName}</Table.Cell>
                   <Table.Cell>
                     <Link
                       className='font-medium text-gray-900 dark:text-white'
-                      to={`/post/${post.slug}`}
+                      to={`/theme/${file.slug}`}
                     >
-                      {post.title}
+                      {file.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.category}</Table.Cell>
+                  <Table.Cell>{file.category}</Table.Cell>
                   <Table.Cell>
                     <span
                       onClick={() => {
                         setShowModal(true);
-                        setPostIdToDelete(post._id);
+                        setPptxIdToDelete(file._id);
                       }}
                       className='font-medium text-red-500 hover:underline cursor-pointer'
                     >
@@ -124,14 +116,14 @@ export default function DashPosts() {
                   <Table.Cell>
                     <Link
                       className='text-teal-500 hover:underline'
-                      to={`/update-post/${post._id}`}
+                      to={`/update-pptx/${file._id}`}
                     >
                       <span>Edit</span>
                     </Link>
                   </Table.Cell>
                 </Table.Row>
-              </Table.Body>
-            ))}
+              ))}
+            </Table.Body>
           </Table>
           {showMore && (
             <button
@@ -143,7 +135,7 @@ export default function DashPosts() {
           )}
         </>
       ) : (
-        <p>Posts are loading or You have no posts yet!</p>
+        <p>You have no PPTX files yet!</p>
       )}
       <Modal
         show={showModal}
@@ -156,10 +148,10 @@ export default function DashPosts() {
           <div className='text-center'>
             <ErrorOutlineIcon className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this post?
+              Are you sure you want to delete this PPTX file?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={handleDeletePost}>
+              <Button color='failure' onClick={handleDeletePPTX}>
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>

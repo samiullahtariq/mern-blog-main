@@ -50,15 +50,12 @@ export default function Header() {
   };
 
   return (
-    <Navbar className='border-b-2'>
-      <Link
-        to='/'
-        className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
-      >
-        <span style={{width : "80px"}} className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-        PluseUp
-        </span>
-      </Link>
+         <Navbar className='border-b-2 sticky top-0 z-50'>
+    <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white' >
+    <span style={{width : "80px"}} className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
+       PluseUp 
+       </span>
+      </Link> 
       <form onSubmit={handleSubmit}>
         <TextInput
           type='text'
@@ -118,8 +115,26 @@ export default function Header() {
           <Link to='/about'>About</Link>
         </Navbar.Link>
         <Navbar.Link active={path === '/search'} as={'div'}>
-          <Link to='/search'>Blogs</Link>
+          <Link to='/write-for-us'>Write For Us</Link>
         </Navbar.Link>
+        <Dropdown
+          inline
+          label={
+            <Navbar.Link as={'div'}>
+              Resources
+            </Navbar.Link>
+          }
+        >
+          <Link to='/search'>
+            <Dropdown.Item>Blogs</Dropdown.Item>
+          </Link>
+          <Link to='/theme'>
+            <Dropdown.Item>Templates</Dropdown.Item>
+          </Link>
+          <Link to='/tools'>
+            <Dropdown.Item>Tools</Dropdown.Item>
+          </Link>
+        </Dropdown>
       </Navbar.Collapse>
     </Navbar>
   );

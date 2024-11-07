@@ -77,6 +77,17 @@ export default function DashSidebar() {
             </Link>
           )}
           {currentUser.isAdmin && (
+            <Link to='/dashboard?tab=template'>
+              <Sidebar.Item
+                active={tab === 'template'}
+                icon={DescriptionIcon}
+                as='div'
+              >
+                PPTX Templates
+              </Sidebar.Item>
+            </Link>
+          )}
+          {currentUser.isAdmin && (
             <>
               <Link to='/dashboard?tab=users'>
                 <Sidebar.Item

@@ -8,10 +8,27 @@ import routes from './routes/routing.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { generateKeywords } from './controllers/postkeyword.controller.js';
-
+import pptFileRoutes from './routes/pptfile.route.js';
+import fs from 'fs';
 
 const app = express();
 const __dirname = path.resolve();
+
+
+const uploadDir = path.join(process.cwd(), 'uploads');
+
+  // Log the directory path
+  console.log('Uploads directory absolute path:', uploadDir);
+
+  // Check if the uploads directory exists
+  if (!fs.existsSync(uploadDir)) {
+    // If it doesn't exist, create it
+    fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('Uploads directory created:', uploadDir);
+  } else {
+    console.log('Uploads directory already exists:', uploadDir);
+  }
+
 
 // Database connection
 // Connect to MongoDB
@@ -35,6 +52,11 @@ app.use(cookieParser());
 
 // Routes
 app.use(routes);
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Add this route for handling pptx uploads and downloads
+app.use('/api/ppt', pptFileRoutes);
 
 app.post('/api/generate-keywords', generateKeywords);
 // Static files
