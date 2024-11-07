@@ -3,6 +3,7 @@ import { Readable } from 'stream';
 import Redis from 'ioredis';
 import Post from '../models/post.model.js';
 import dotenv from 'dotenv';
+import PptFile from '../models/ppt.model.js';
 
 dotenv.config();
 
@@ -28,13 +29,24 @@ export const generateSitemap = async (req, res) => {
       priority: 0.8,
     }));
 
-    urls.push({ url: '/', changefreq: 'weekly', priority: 1.0 });
-    urls.push({ url: '/keyword-extractor', changefreq: 'weekly', priority: 0.8 });
-    urls.push({ url: '/generate-keywords', changefreq: 'weekly', priority: 0.8 });
-    urls.push({ url: '/tip-calculator', changefreq: 'weekly', priority: 0.8 });
+    const pptx = await PptFile.find().select('slug');
+    const pptxurls = pptx.map(pptx =>({
+      url: `/theme/${pptx.slug}`,
+      changefreq: 'daily',
+      priority: 0.8,
+    }))
+
+    const allUrls = [
+      ...urls,
+      ...pptxurls,
+      { url: '/', changefreq: 'weekly', priority: 1.0 },
+      { url: '/keyword-extractor', changefreq: 'weekly', priority: 0.8 },
+      { url: '/generate-keywords', changefreq: 'weekly', priority: 0.8 },
+      { url: '/tip-calculator', changefreq: 'weekly', priority: 0.8 }
+    ];
 
     const stream = new SitemapStream({ hostname: 'https://www.pluseup.com/' });
-    const sitemap = await streamToPromise(Readable.from(urls).pipe(stream)).then(data => data.toString());
+    const sitemap = await streamToPromise(Readable.from(allUrls).pipe(stream)).then(data => data.toString());
 
     // Cache the generated sitemap
     await redisSitemap.set('sitemap', sitemap, 'EX', 43200);
