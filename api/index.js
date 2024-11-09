@@ -14,6 +14,18 @@ import fs from 'fs';
 const app = express();
 const __dirname = path.resolve();
 
+app.use((req, res, next) => {
+  // Check if the request is not HTTPS
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(`https://${req.hostname}${req.url}`);
+  }
+  // Redirect non-www to www
+  if (req.hostname === 'pluseup.com') {
+    return res.redirect(301, `https://www.pluseup.com${req.url}`);
+  }
+  next();
+});
+
 
 const uploadDir = path.join(process.cwd(), 'uploads');
 
