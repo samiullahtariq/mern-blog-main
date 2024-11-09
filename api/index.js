@@ -14,6 +14,8 @@ import fs from 'fs';
 const app = express();
 const __dirname = path.resolve();
 
+app.set('trust proxy', true);
+
 app.use((req, res, next) => {
   // Check if the request is not HTTPS
   if (req.headers['x-forwarded-proto'] !== 'https') {
@@ -57,7 +59,7 @@ mongoose
 
 
 // Middleware
-app.set('trust proxy', true);
+
 app.use(compressionMiddleware);
 app.use(express.json());
 app.use(cookieParser());
