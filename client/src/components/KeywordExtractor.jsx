@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import ExtractIcon from '@mui/icons-material/Extension';
 import { removeStopwords } from 'stopword';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 const customStopWords = ['not', 'when', , 'two' ,'but', 'they', 'you' , 'your' ,'and' ,'can' ,'the' , 'more' , 'with' , 'for' , 'that', 'this' ,'which' , 'their' , 'how',
     'help' , 'between' , 'post' , 'blog' , 'are' , 'into' , 'often' ,'will' , 'use' , 'out' , 'also' , 'user' , 'have' ,

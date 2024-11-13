@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper } from '@mui/material';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 function TipCalculator() {
   const [price, setPrice] = useState('');

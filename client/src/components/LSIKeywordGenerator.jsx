@@ -16,7 +16,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

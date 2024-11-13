@@ -2,7 +2,7 @@ import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});

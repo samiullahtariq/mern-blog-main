@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import LazyLoad from '../components/LazyLoad';
 
 const loadHeavyComponent = () => import('../components/CallToAction');
@@ -23,6 +23,7 @@ export default function Home() {
        <Helmet>
     <title>PluseUp - Boosting Your Growth through Smarter SEO</title>
     <meta name="description" content="At PluseUp, we are offer SEO solutions focused on boosting online visibility and driving long-term growth with customer Satisfaction."/>
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/" />
    </Helmet>
       <div className='flex flex-col gap-6 p-6 md:p-28 md:px-3 max-w-6xl mx-auto '>

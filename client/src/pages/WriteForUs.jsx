@@ -4,7 +4,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import CreateIcon from '@mui/icons-material/Create';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 export default function WriteForUs() {
   const [posts, setPosts] = useState([]);

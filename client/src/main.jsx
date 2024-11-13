@@ -6,10 +6,12 @@ import { store, persistor } from './redux/store.js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import ThemeProvider from './components/ThemeProvider.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 const rootElement = document.getElementById("root");
 
 const app = (
+  <HelmetProvider>
   <PersistGate persistor={persistor}>
     <Provider store={store}>
       <ThemeProvider>
@@ -17,6 +19,7 @@ const app = (
       </ThemeProvider>
     </Provider>
   </PersistGate>
+  </HelmetProvider>
 );
 
 if (rootElement.hasChildNodes()) {

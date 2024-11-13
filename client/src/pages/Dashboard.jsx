@@ -7,7 +7,7 @@ import DashUsers from '../components/DashUsers';
 import DashComments from '../components/DashComments';
 import DashboardComp from '../components/DashboardComp';
 import DashPPTX from '../components/DashPPTX';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 
 export default function Dashboard() {
   const location = useLocation();

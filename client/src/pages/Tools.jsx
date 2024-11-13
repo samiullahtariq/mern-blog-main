@@ -3,7 +3,7 @@ import {ListItem, ListItemIcon, ListItemText, Paper, Typography, Grid } from '@m
 import TipIcon from '@mui/icons-material/AttachMoney'; 
 import KeywordIcon from '@mui/icons-material/Extension';
 import { Link } from 'react-router-dom';
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet-async';
 function Tools() {
   const tools = [
     {
