@@ -35,6 +35,9 @@ export default function TemplateCard() {
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/theme" />
+    <meta property="og:title" content="Presentation Templates - PluseUp"/>
+      <meta property="og:description" content="Download our Presentation Templates for Google Slides & PowerPoint! ✓ Free ✓ Customizable ✓ Perfect for professional insights" />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
 
       {templates.map((template) => (

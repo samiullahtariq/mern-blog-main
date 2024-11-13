@@ -31,6 +31,10 @@ function Tools() {
     and improve productivity. Explore our collection and find the right tool for your needs."/>
    <meta name="robots" content="noindex, nofollow" />
     <link rel="canonical" href="https://www.pluseup.com/tools" />
+    <meta property="og:title" content="Tools Page: Useful Online Tools for Everyone"/>
+      <meta property="og:description" content="Discover a variety of handy online tools designed to simplify tasks 
+    and improve productivity. Explore our collection and find the right tool for your needs." />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
       <Typography variant="h5" gutterBottom align="center">
         Tools

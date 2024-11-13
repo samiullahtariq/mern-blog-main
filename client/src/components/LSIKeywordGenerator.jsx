@@ -89,6 +89,10 @@ export default function LSIKeywordGenerator() {
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/generate-keywords" />
+    <meta property="og:title" content="LSI Keyword Generator"/>
+      <meta property="og:description" content="Generate find Google autocomplete suggestions for effective SEO. 
+    Use our LSI keyword generator to boost your content strategy and rankings." />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
       <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' , color : 'black' }}>Find Great Keywords Using Google Autocomplete</h1>
       <TextField

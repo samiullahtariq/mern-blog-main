@@ -72,6 +72,10 @@ function KeywordExtractor() {
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/keyword-extractor" />
+    <meta property="og:title" content="Extract Keywords from Text Instantly"/>
+      <meta property="og:description" content="Use our keyword extractor tool to quickly extract 
+    keywords from any text. Enhance your SEO strategy by identifying important keywords for content optimization" />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
       <Typography variant="h5" gutterBottom>
         Frequency and Keyword Extractor

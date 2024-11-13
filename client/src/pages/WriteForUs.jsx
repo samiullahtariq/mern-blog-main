@@ -25,6 +25,9 @@ export default function WriteForUs() {
     <meta name="description" content="Passionate about SEO, digital marketing, or content strategy? Write for us! Share your insights, tips, and unique perspectives with our audience."/>
    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/write-for-us" />
+    <meta property="og:title" content="Write For Us - SEO and Digital Marketing"/>
+      <meta property="og:description" content="Passionate about SEO, digital marketing, or content strategy? Write for us! Share your insights, tips, and unique perspectives with our audience." />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 dark:text-white sm:tracking-tight">

@@ -100,6 +100,9 @@ export default function Search() {
     <title>PluseUp - Blog Search</title>
     <meta name="description" content="You can search blogs based on the category here."/>
     <link rel="canonical" href="https://www.pluseup.com/search" />
+    <meta property="og:title" content="PluseUp - Blog Search"/>
+      <meta property="og:description" content="You can search blogs based on the category here." />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
     <div className='flex flex-col md:flex-row'>
       <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>

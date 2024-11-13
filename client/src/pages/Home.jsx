@@ -25,6 +25,9 @@ export default function Home() {
     <meta name="description" content="At PluseUp, we are offer SEO solutions focused on boosting online visibility and driving long-term growth with customer Satisfaction."/>
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/" />
+    <meta property="og:title" content="PluseUp - Boosting Your Growth through Smarter SEO"/>
+      <meta property="og:description" content="At PluseUp, we are offer SEO solutions focused on boosting online visibility and driving long-term growth with customer Satisfaction." />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
       <div className='flex flex-col gap-6 p-6 md:p-28 md:px-3 max-w-6xl mx-auto '>
         <h1 className='text-3xl font-bold lg:text-4xl'>Welcome to PluseUp

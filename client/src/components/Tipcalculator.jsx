@@ -40,6 +40,10 @@ function TipCalculator() {
      <meta name="robots" content="index, follow" />
      <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://www.pluseup.com/tip-calculator" />
+    <meta property="og:title" content="Tip Calculator: Calculate Tip & Split Bill Easily"/>
+      <meta property="og:description" content="Calculate tips for tattoo artists, hair stylists, nail salons, 
+    and hairdressers with our tip calculator. Easily split bills and find the perfect tip amount for any service." />
+      <meta name="twitter:card" content="summary_large_image" />
    </Helmet>
     <Paper elevation={3} style={{ padding: '20px', maxWidth: '400px', margin: '20px auto' }}>
       <Typography variant="h5" gutterBottom align="center">
